@@ -12,6 +12,7 @@ Este documento descreve como compilar, executar e usar rapidamente a API, além 
 - Endpoints REST
 - Modelos (DTOs)
 - Exemplos de requisições (curl)
+- Documentação completa
 - Configuração de keep-alive / Connection pooling
 - Como rodar testes
 - Estrutura do projeto
@@ -87,6 +88,7 @@ Observações:
 - Se usar `bodyType: RAW`, o campo `body.raw` pode ser qualquer objeto — será serializado para JSON
 - Para `FORM_DATA`/`FORM_URLENCODED` use `body.formData` com um objeto de chave/valor
 - Para `GRAPHQL` coloque o campo `graphQL` dentro de `body`
+- **Novo:** Use `RAW_HTML`, `RAW_JAVASCRIPT` ou `RAW_XML` para enviar conteúdo literal (não serializado) — ver exemplos abaixo
 
 ### Exemplos com curl
 
@@ -102,6 +104,48 @@ curl -X POST http://localhost:8080/requisicao/enviar \
     "headers":{"Accept":"text/plain"},
     "bodyType":"RAW",
     "body":{"raw": {"ping":"ping"}}
+  }'
+```
+
+Enviar HTML (RAW_HTML):
+
+```bash
+curl -X POST http://localhost:8080/requisicao/enviar \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nome":"Enviar HTML",
+    "method":"POST",
+    "url":"http://example.com/receive",
+    "bodyType":"RAW_HTML",
+    "body":{"raw":"<html><body><h1>Hello</h1></body></html>"}
+  }'
+```
+
+Enviar JavaScript (RAW_JAVASCRIPT):
+
+```bash
+curl -X POST http://localhost:8080/requisicao/enviar \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nome":"Enviar JavaScript",
+    "method":"POST",
+    "url":"http://example.com/script",
+    "bodyType":"RAW_JAVASCRIPT",
+    "body":{"raw":"function hello() { console.log(\"Hello\"); }"}
+  }'
+```
+
+Enviar XML (RAW_XML):
+
+```bash
+curl -X POST http://localhost:8080/requisicao/enviar \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nome":"Enviar XML",
+    "method":"POST",
+    "url":"http://example.com/xml",
+    "bodyType":"RAW_XML",
+    "body":{"raw":"<?xml version=\"1.0\"?><root><item>value</item></root>"}
   }'
 ```
 
@@ -151,6 +195,16 @@ Principais pacotes:
 - `com.euflausino.requisition.dto` — DTOs públicos da API
 - `com.euflausino.requisition.send.service` — serviços que constroem e enviam requisições
 - `com.euflausino.requisition.send.dto.mapper` — mappers de resposta
+
+## Documentação completa
+
+- **[docs/API.md](docs/API.md)** — Referência detalhada de endpoints, DTOs e tipos suportados
+- **[docs/EXAMPLES.md](docs/EXAMPLES.md)** — Exemplos de payloads para cada tipo de body
+- **[docs/TRANSMISSION_EXAMPLES.md](docs/TRANSMISSION_EXAMPLES.md)** — Como o conteúdo é transmitido na rede para cada tipo
+- **[docs/CHANGELOG.md](docs/CHANGELOG.md)** — Histórico de mudanças
+
+### Entendimento rápido
+Se você quer entender a **diferença prática** entre `RAW`, `RAW_HTML`, `RAW_JAVASCRIPT` e `RAW_XML`, veja [docs/TRANSMISSION_EXAMPLES.md](docs/TRANSMISSION_EXAMPLES.md) — mostra exatamente o que é enviado na rede em cada caso.
 
 ## Testes
 

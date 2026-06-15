@@ -1,5 +1,7 @@
 package com.euflausino.requisition.entity;
 
+import com.euflausino.requisition.entity.enums.TipoRequisicaoEntity;
+
 import java.util.Map;
 
 public class RequisicaoEntity {

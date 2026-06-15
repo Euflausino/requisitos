@@ -2,10 +2,10 @@ package com.euflausino.requisition.dto.mapper;
 
 import com.euflausino.requisition.dto.DTOConteudoRequisicao;
 import com.euflausino.requisition.dto.DTORequisicao;
-import com.euflausino.requisition.dto.DTOTipoRequisicao;
+import com.euflausino.requisition.dto.enums.DTOTipoRequisicao;
 import com.euflausino.requisition.entity.ConteudoRequisicaoEntity;
 import com.euflausino.requisition.entity.RequisicaoEntity;
-import com.euflausino.requisition.entity.TipoRequisicaoEntity;
+import com.euflausino.requisition.entity.enums.TipoRequisicaoEntity;
 
 public class RequisicaoMapper {
 

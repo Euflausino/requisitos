@@ -1,5 +1,7 @@
 package com.euflausino.requisition.dto;
 
+import com.euflausino.requisition.dto.enums.DTOTipoRequisicao;
+
 import java.util.Map;
 
 public record DTORequisicao(

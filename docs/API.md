@@ -48,12 +48,15 @@ Response: `DTORequisicao` (JSON)
 
 ### DTOTipoRequisicao
 Valores:
-- NONE
-- FORM_DATA
-- FORM_URLENCODED
-- RAW
-- BINARY
-- GRAPHQL
+- **NONE** — Sem corpo
+- **FORM_DATA** — Multipart form-data
+- **FORM_URLENCODED** — Application/x-www-form-urlencoded
+- **RAW** — JSON ou objeto genérico (será serializado para JSON)
+- **RAW_HTML** — HTML/XHTML literal (enviado como texto puro com `Content-Type: text/html`)
+- **RAW_JAVASCRIPT** — JavaScript literal (enviado como texto puro com `Content-Type: application/javascript`)
+- **RAW_XML** — XML literal (enviado como texto puro com `Content-Type: application/xml`)
+- **BINARY** — Dados binários
+- **GRAPHQL** — Query/mutation GraphQL
 
 ### DTOConteudoRequisicao
 - raw: Object — conteúdo bruto (serializado para JSON quando RAW)
