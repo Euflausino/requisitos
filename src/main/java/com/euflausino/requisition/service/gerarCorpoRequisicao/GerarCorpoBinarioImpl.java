@@ -13,7 +13,7 @@ public class GerarCorpoBinarioImpl implements GerarCorpo{
     @Override
     public CorpoRequisicaoPreparadoEntity gerar(RequisicaoEntity requisicao) {
         byte[] dados = requisicao.getBody() != null ? requisicao.getBody().getBinary() : new byte[0];
-        String tipoConteudo = ExtrairTipoConteudo.extrair(requisicao.getHeaders(), tipoRequisicaoEntity.getType());
+        String tipoConteudo = ExtrairTipoConteudo.extrair(requisicao.getHeaders(), requisicao.getBodyType().getType());
         return new CorpoRequisicaoPreparadoEntity(dados, tipoConteudo);
     }
 }

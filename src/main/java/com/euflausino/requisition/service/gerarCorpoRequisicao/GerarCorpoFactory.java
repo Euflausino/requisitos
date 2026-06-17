@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.stereotype.Service;
 
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -14,7 +15,7 @@ import java.util.function.Supplier;
 @Service
 public class GerarCorpoFactory{
 
-    private static final Map<TipoRequisicaoEntity, Function<RequisicaoEntity, CorpoRequisicaoPreparadoEntity>>CORPOS = new EnumMap<>(RequisicaoEntity.class);
+    private static final Map<TipoRequisicaoEntity, Function<RequisicaoEntity, CorpoRequisicaoPreparadoEntity>>CORPOS = new HashMap<>();
 
     static {
         CORPOS.put(TipoRequisicaoEntity.BINARY, requisicaoEntity -> new GerarCorpoBinarioImpl().gerar(requisicaoEntity));
