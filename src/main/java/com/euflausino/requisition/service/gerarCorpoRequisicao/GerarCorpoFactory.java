@@ -6,11 +6,9 @@ import com.euflausino.requisition.entity.enums.TipoRequisicaoEntity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.stereotype.Service;
 
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 @Service
 public class GerarCorpoFactory{
@@ -18,6 +16,7 @@ public class GerarCorpoFactory{
     private static final Map<TipoRequisicaoEntity, Function<RequisicaoEntity, CorpoRequisicaoPreparadoEntity>>CORPOS = new HashMap<>();
 
     static {
+        CORPOS.put(TipoRequisicaoEntity.NONE, requisicaoEntity -> new CorpoRequisicaoPreparadoEntity(null,  null));
         CORPOS.put(TipoRequisicaoEntity.BINARY, requisicaoEntity -> new GerarCorpoBinarioImpl().gerar(requisicaoEntity));
         CORPOS.put(TipoRequisicaoEntity.GRAPHQL, requisicaoEntity -> {
             try {
