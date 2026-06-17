@@ -6,6 +6,7 @@ import com.euflausino.requisition.entity.RequisicaoEntity;
 import com.euflausino.requisition.entity.RespostaEntity;
 import com.euflausino.requisition.exceptions.RespostaNulaDoServidorException;
 import com.euflausino.requisition.exceptions.UrlInvalidaException;
+import com.euflausino.requisition.service.gerarCorpoRequisicao.GerarCorpoFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -24,20 +25,20 @@ import java.util.Map;
 public class EnviaRequisicaoEspecificadaWebClientService {
 
     private final WebClient webClient;
-    private final GerenciaCorpoDaRequisicaoService gerenciadorCorpo;
+    private final GerarCorpoFactory gerarCorpoFactory;
 
     public EnviaRequisicaoEspecificadaWebClientService(
-            WebClient.Builder webClientBuilder,
-            GerenciaCorpoDaRequisicaoService gerenciadorCorpo) {
+            WebClient.Builder webClientBuilder,  GerarCorpoFactory gerarCorpoFactory) {
         this.webClient = webClientBuilder.build();
-        this.gerenciadorCorpo = gerenciadorCorpo;
+        this.gerarCorpoFactory = gerarCorpoFactory;
+
     }
 
     public RespostaEntity enviar(RequisicaoEntity requisicao) throws JsonProcessingException {
         validarRequisicao(requisicao);
 
         URI uri = construirUri(requisicao);
-        CorpoRequisicaoPreparadoEntity corpoPreparado = gerenciadorCorpo.prepararCorpo(requisicao);
+        CorpoRequisicaoPreparadoEntity corpoPreparado = gerarCorpoFactory.gerarCorpo(requisicao.getBodyType(),requisicao);
 
         long tempoInicio = System.currentTimeMillis();
         Map.Entry<ClientResponse, String> respostaBruta = executarRequisicao(requisicao, uri, corpoPreparado);
