@@ -98,7 +98,7 @@ Enviar GET com body (exemplo):
 curl -X POST http://localhost:8080/requisicao/enviar \
   -H "Content-Type: application/json" \
   -d '{
-    "nome":"Teste GET com body",
+    "name":"Teste GET com body",
     "method":"GET",
     "url":"http://localhost:8081/email/health",
     "headers":{"Accept":"text/plain"},
@@ -113,7 +113,7 @@ Enviar HTML (RAW_HTML):
 curl -X POST http://localhost:8080/requisicao/enviar \
   -H "Content-Type: application/json" \
   -d '{
-    "nome":"Enviar HTML",
+    "name":"Enviar HTML",
     "method":"POST",
     "url":"http://example.com/receive",
     "bodyType":"RAW_HTML",
@@ -127,7 +127,7 @@ Enviar JavaScript (RAW_JAVASCRIPT):
 curl -X POST http://localhost:8080/requisicao/enviar \
   -H "Content-Type: application/json" \
   -d '{
-    "nome":"Enviar JavaScript",
+    "name":"Enviar JavaScript",
     "method":"POST",
     "url":"http://example.com/script",
     "bodyType":"RAW_JAVASCRIPT",
@@ -141,7 +141,7 @@ Enviar XML (RAW_XML):
 curl -X POST http://localhost:8080/requisicao/enviar \
   -H "Content-Type: application/json" \
   -d '{
-    "nome":"Enviar XML",
+    "name":"Enviar XML",
     "method":"POST",
     "url":"http://example.com/xml",
     "bodyType":"RAW_XML",
