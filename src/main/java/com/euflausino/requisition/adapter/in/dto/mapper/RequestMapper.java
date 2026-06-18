@@ -18,7 +18,7 @@ public class RequestMapper {
                 requestDto.url(),
                 requestDto.headers(),
                 mapRequestBodyTypeDTOToEntity(requestDto.bodyType()),
-                requestDto.body() == null ? null : mapRequestBodyDTOToEntity(requestDto.body()),
+                mapRequestBodyDTOToEntity(requestDto.body()),
                 requestDto.queryParams()
         );
     }
@@ -44,10 +44,10 @@ public class RequestMapper {
 
     private static RequestBodyModel mapRequestBodyDTOToEntity(RequestBodyDTO conteudoRequisicao) {
         return new RequestBodyModel(
-                conteudoRequisicao.raw(),
-                conteudoRequisicao.formData(),
-                conteudoRequisicao.binary(),
-                mapGraphQLBodyDTOToEntity(conteudoRequisicao.graphQL())
+                conteudoRequisicao.raw() == null ? null : conteudoRequisicao.raw(),
+                conteudoRequisicao.formData() ==  null ? null : conteudoRequisicao.formData(),
+                conteudoRequisicao.binary() ==   null ? null : conteudoRequisicao.binary(),
+                conteudoRequisicao.graphQL() == null? null : mapGraphQLBodyDTOToEntity(conteudoRequisicao.graphQL())
         );
     }
 

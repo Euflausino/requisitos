@@ -1,5 +1,6 @@
 package com.euflausino.requisition.application.model;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class RequestBodyModel {
@@ -50,4 +51,13 @@ public class RequestBodyModel {
         this.graphQL = graphQL;
     }
 
+    @Override
+    public String toString() {
+        return "RequestBodyModel{" +
+                "raw=" + raw +
+                ", formData=" + formData +
+                ", binary=" + Arrays.toString(binary) +
+                ", graphQL=" + graphQL +
+                '}';
+    }
 }
