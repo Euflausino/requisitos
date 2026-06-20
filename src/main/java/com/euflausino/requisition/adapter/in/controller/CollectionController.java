@@ -22,7 +22,7 @@ public class CollectionController {
     }
 
     @PostMapping
-    public ResponseEntity<CollectionDTO> saveCollection(@RequestBody CollectionDTO collectionDto) throws IOException {
+    public ResponseEntity<CollectionDTO> saveCollection(@RequestBody CollectionDTO collectionDto){
 
         return ResponseEntity.ok(CollectionMapper.mapModelToCollectionDTO(
                     saveCollection.save(

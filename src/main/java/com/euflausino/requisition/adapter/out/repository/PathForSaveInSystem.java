@@ -8,9 +8,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Component
-public final class SavePath {
+public final class PathForSaveInSystem {
 
-    private SavePath() {}
+    private PathForSaveInSystem() {}
 
     private static final String APP_FOLDER = "requisitor";
 

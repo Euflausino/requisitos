@@ -8,16 +8,16 @@ import tools.jackson.databind.ObjectMapper;
 import java.nio.file.Path;
 
 @Service
-public class SaveCollection implements SaveCollectionOut {
+public class SaveCollectionInSystem implements SaveCollectionOut {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
-    public SaveCollection() {
+    public SaveCollectionInSystem() {
     }
 
     @Override
     public CollectionModel save(CollectionModel request) {
-        final Path file = SavePath.collectionFile(request.getName());
+        final Path file = PathForSaveInSystem.collectionFile(request.getName());
         mapper.writerWithDefaultPrettyPrinter().writeValue(file.toFile(), request);
         return request;
     }

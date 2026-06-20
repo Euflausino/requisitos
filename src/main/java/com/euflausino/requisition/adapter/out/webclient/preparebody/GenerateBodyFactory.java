@@ -3,8 +3,8 @@ package com.euflausino.requisition.adapter.out.webclient.preparebody;
 import com.euflausino.requisition.adapter.out.webclient.dto.OutCompletedRequestBodyDTO;
 import com.euflausino.requisition.adapter.out.webclient.dto.OutRequestModelDTO;
 import com.euflausino.requisition.adapter.out.webclient.dto.enums.OutRequestBodyTypeDTO;
-import com.euflausino.requisition.application.model.FinalRequestBodyModel;
-import com.euflausino.requisition.application.model.enums.RequestBodyTypeModel;
+
+import com.euflausino.requisition.adapter.out.webclient.exceptions.InvalidBodyTypeException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +44,7 @@ public class GenerateBodyFactory {
     public OutCompletedRequestBodyDTO generateBody(OutRequestBodyTypeDTO requestBodyTypeModel, OutRequestModelDTO outRequestModelDTO) {
         Function<OutRequestModelDTO, OutCompletedRequestBodyDTO> bodyStrategy = BODY.get(requestBodyTypeModel);
         if (bodyStrategy == null) {
-            throw new IllegalArgumentException("Invalid Body Type: " + requestBodyTypeModel);
+            throw new InvalidBodyTypeException("Invalid Body Type: " + requestBodyTypeModel);
         }
         return bodyStrategy.apply(outRequestModelDTO);
     }

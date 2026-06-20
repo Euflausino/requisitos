@@ -4,8 +4,9 @@ import com.euflausino.requisition.adapter.in.dto.RequestDTO;
 import com.euflausino.requisition.adapter.in.dto.ResponseDTO;
 import com.euflausino.requisition.adapter.in.dto.mapper.RequestMapper;
 import com.euflausino.requisition.adapter.in.dto.mapper.ResponseMapper;
-import com.euflausino.requisition.adapter.out.repository.SaveRequest;
+import com.euflausino.requisition.adapter.out.repository.SaveRequestInSystem;
 import com.euflausino.requisition.application.port.in.MakesRequestIn;
+import com.euflausino.requisition.application.port.in.SaveRequestIn;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,15 +20,15 @@ import java.io.IOException;
 public class RequestController {
 
     private final MakesRequestIn sendRequest;
-    private final SaveRequest saveRequest;
+    private final SaveRequestIn saveRequestInSystem;
 
-    public RequestController(MakesRequestIn sendRequest, SaveRequest saveRequest) {
+    public RequestController(MakesRequestIn sendRequest, SaveRequestIn saveRequestInSystem) {
         this.sendRequest = sendRequest;
-        this.saveRequest = saveRequest;
+        this.saveRequestInSystem = saveRequestInSystem;
     }
 
     @PostMapping("/enviar")
-    public ResponseEntity<ResponseDTO> sendRequest(@RequestBody RequestDTO request) throws IOException {
+    public ResponseEntity<ResponseDTO> sendRequest(@RequestBody RequestDTO request){
         return ResponseEntity.ok(
                 ResponseMapper.toDTO(
                         sendRequest.send(RequestMapper.mapRequestDTOToModel(request))
@@ -36,10 +37,10 @@ public class RequestController {
     }
 
     @PostMapping("/salvar")
-    public ResponseEntity<RequestDTO> saveRequest(@RequestBody RequestDTO requisicao) throws IOException {
+    public ResponseEntity<RequestDTO> saveRequest(@RequestBody RequestDTO requisicao){
         return ResponseEntity.ok(
                 RequestMapper.mapRequestModelToDTO(
-                        saveRequest.save(RequestMapper.mapRequestDTOToModel(requisicao))
+                        saveRequestInSystem.save(RequestMapper.mapRequestDTOToModel(requisicao))
                 )
         );
     }

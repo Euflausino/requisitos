@@ -39,13 +39,10 @@ public class SendWebClientRequest implements MakesRequestOut {
 
     @Override
     public ResponseModel send(RequestModel requestModel) {
-
         OutRequestModelDTO request = WebClientMapper.mapRequestModelToDTO(requestModel);
         validateRequest(request);
-
         URI uri = uriBuilder(request);
         OutCompletedRequestBodyDTO generatedBody = generateBodyFactory.generateBody(request.bodyType(),request);
-
         long startRequestTime = System.currentTimeMillis();
         Map.Entry<ClientResponse, String> webClientResponse = executeRequest(request, uri, generatedBody);
         long endRequestTime = System.currentTimeMillis();
